@@ -16,7 +16,7 @@
         </tr>
         <% InformationForm.all.each do |form| %>
           <tr>
-            <td>blank</td>
+            <td><%= form.profile_picture %></td>
             <td><%= form.first_name %></td>
             <td><%= form.last_name %></td>
             <td><%= form.age %></td>

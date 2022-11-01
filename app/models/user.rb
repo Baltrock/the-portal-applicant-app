@@ -12,4 +12,5 @@ class User < ApplicationRecord
   has_many :complaint_forms, dependent: :destroy
   has_many :transfer_forms, dependent: :destroy
   has_one :resignation_forms, dependent: :destroy
+  has_one :photo
 end
