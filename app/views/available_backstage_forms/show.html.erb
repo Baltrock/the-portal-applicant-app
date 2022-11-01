@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @available_backstage_form %>
+
+<div>
+  <%= link_to "Edit this available backstage form", edit_available_backstage_form_path(@available_backstage_form) %> |
+  <%= link_to "Back to available backstage forms", available_backstage_forms_path %>
+
+  <%= button_to "Destroy this available backstage form", @available_backstage_form, method: :delete %>
+</div>

@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Available frontstage forms</h1>
+
+<div id="available_frontstage_forms">
+  <% @available_frontstage_forms.each do |available_frontstage_form| %>
+    <%= render available_frontstage_form %>
+    <p>
+      <%= link_to "Show this available frontstage form", available_frontstage_form %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New available frontstage form", new_available_frontstage_form_path %>
+<%= link_to "Back to the main page", admin_registration_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>

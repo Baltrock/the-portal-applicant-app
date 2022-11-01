@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Transfer forms</h1>
+
+<div id="transfer_forms">
+  <% @transfer_forms.each do |transfer_form| %>
+    <%= render transfer_form %>
+    <p>
+      <%= link_to "Show this transfer form", transfer_form %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New transfer form", new_transfer_form_path %>
+<%= link_to "Back to the main page", user_registration_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>

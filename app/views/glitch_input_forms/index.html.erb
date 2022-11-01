@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Glitch input forms</h1>
+
+<div id="glitch_input_forms">
+  <% @glitch_input_forms.each do |glitch_input_form| %>
+    <%= render glitch_input_form %>
+    <p>
+      <%= link_to "Show this glitch input form", glitch_input_form %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New glitch input form", new_glitch_input_form_path %>
+<%= link_to "Back to the main page", admin_registration_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>

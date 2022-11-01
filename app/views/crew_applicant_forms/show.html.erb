@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @crew_applicant_form %>
+
+<div>
+  <%= link_to "Edit this crew applicant form", edit_crew_applicant_form_path(@crew_applicant_form) %> |
+  <%= link_to "Back to crew applicant forms", crew_applicant_forms_path %>
+
+  <%= button_to "Destroy this crew applicant form", @crew_applicant_form, method: :delete %>
+</div>

@@ -1,0 +1,17 @@
+.user_primary {
+  margin: 20px;
+  padding: 20px;
+  background-color: bisque;
+}
+
+.applications {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.officialcard1 {
+  padding: 10px;
+  border: 1px solid;
+  padding: 10px;
+  width: fit-content;
+  justify-content: center;
+}

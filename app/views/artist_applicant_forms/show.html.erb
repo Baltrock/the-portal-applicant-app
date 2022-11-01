@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @artist_applicant_form %>
+
+<div>
+  <%= link_to "Edit this artist applicant form", edit_artist_applicant_form_path(@artist_applicant_form) %> |
+  <%= link_to "Back to artist applicant forms", artist_applicant_forms_path %>
+
+  <%= button_to "Destroy this artist applicant form", @artist_applicant_form, method: :delete %>
+</div>

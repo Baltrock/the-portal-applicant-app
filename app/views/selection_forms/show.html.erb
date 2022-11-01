@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @selection_form %>
+
+<div>
+  <%= link_to "Edit this selection form", edit_selection_form_path(@selection_form) %> |
+  <%= link_to "Back to selection forms", selection_forms_path %>
+
+  <%= button_to "Destroy this selection form", @selection_form, method: :delete %>
+</div>

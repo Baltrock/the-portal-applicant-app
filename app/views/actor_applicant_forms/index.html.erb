@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Actor applicant forms</h1>
+
+<div id="actor_applicant_forms">
+  <% @actor_applicant_forms.each do |actor_applicant_form| %>
+    <%= render actor_applicant_form %>
+    <p>
+      <%= link_to "Show this actor applicant form", actor_applicant_form %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New actor applicant form", new_actor_applicant_form_path %>
+<%= link_to "Back to the main page", user_registration_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>

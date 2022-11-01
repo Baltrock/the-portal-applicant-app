@@ -1,0 +1,27 @@
+.benscard {
+  padding: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  width: fit-content;
+}
+
+.benscard1 {
+  padding: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  width: fit-content;
+}
+
+table, td {
+  border: 1px solid;
+}
+
+td,
+th {
+    border: 1px solid ;
+    padding: 10px;
+    width: fit-content;
+    justify-content: center;
+}

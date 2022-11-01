@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Update forms</h1>
+
+<div id="update_forms">
+  <% @update_forms.each do |update_form| %>
+    <%= render update_form %>
+    <p>
+      <%= link_to "Show this update form", update_form %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New update form", new_update_form_path %>
+<%= link_to "Back to the main page", admin_registration_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>

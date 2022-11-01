@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @update_form %>
+
+<div>
+  <%= link_to "Edit this update form", edit_update_form_path(@update_form) %> |
+  <%= link_to "Back to update forms", update_forms_path %>
+
+  <%= button_to "Destroy this update form", @update_form, method: :delete %>
+</div>

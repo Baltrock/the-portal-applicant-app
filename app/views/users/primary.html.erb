@@ -1,0 +1,115 @@
+<div class="user_primary">
+  This is a the front-page of the USER root<br>
+
+  <%= link_to "Information Form", form_of_information_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %><br>
+  <%= link_to "Become an Actor", actor_applicant_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
+  <%= link_to "Become an Artist", artist_applicant_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %><br>
+  <%= link_to "Become a Musician", musician_form_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
+  <%= link_to "Join the Crew", crew_applicant_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %><br>
+  <%= link_to "Complaint", form_complaint_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
+  <%= link_to "Transfer", form_transfer_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
+  <%= link_to "Resign", form_resign_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
+
+  <%= button_to "Log out", destroy_user_session_path, method: :delete, form: {  data: { turbo: :false } }, class: "dropdown-item" %>
+  <br>
+  <h3>Here is your information:</h3>
+  <br>
+  <div class="applications">
+    <div class="officialcard1">
+      <h4>Acting Applications:</h4><br>
+      <table>
+        <tr>
+          <th>Project:</th>
+          <th>Desired Role</th>
+          <th>Interest</th>
+          <th>Availability</th>
+          <th>Audition Link</th>
+        </tr>
+        <% current_user.actor_applicant_forms.each do | form | %>
+          <tr>
+            <td><%= form.project_title %></td>
+            <td><%= form.preferred_role %></td>
+            <td><%= form.interest_reason %></td>
+            <td><%= form.availability %></td>
+            <td><%= form.audition_tape %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div><br>
+    <div class="officialcard1">
+      <h4>Art Applications:</h4><br>
+      <table>
+        <tr>
+          <th>Project</th>
+          <th>Art Form</th>
+          <th>Style</th>
+          <th>Interest</th>
+          <th>Audition Link</th>
+          <th>Availability</th>
+        </tr>
+        <% current_user.artist_applicant_forms.each do | form | %>
+          <tr>
+            <td><%= form.project_title %></td>
+            <td><%= form.art_form %></td>
+            <td><%= form.art_style %></td>
+            <td><%= form.interest_reason %></td>
+            <td><%= form.art_submission %></td>
+            <td><%= form.availability %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div><br>
+    <div class="officialcard1">
+      <h4>Music Applications:</h4><br>
+      <table>
+        <tr>
+          <th>Project</th>
+          <th>Preferred Style</th>
+          <th>instrument</th>
+          <th>Interest</th>
+          <th>Submission</th>
+          <th>Availability:</th>
+        </tr>
+        <% current_user.musician_applicant_forms.each do | form | %>
+          <tr>
+            <td><%= form.project_title %></td>
+            <td><%= form.preferred_style %></td>
+            <td><%= form.instrument %></td>
+            <td><%= form.interest_reason %></td>
+            <td><%= form.availability %></td>
+            <td><%= form.audition_tape %></td>
+
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div><br>
+  <div class="officialcard1">
+    <h4>Crew Applications:</h4><br>
+      <table>
+        <tr>
+          <th>Project:</th>
+          <th>Preferred Role</th>
+          <th>Experience</th>
+          <th>Interest</th>
+          <th>Availability</th>
+        </tr>
+        <% current_user.crew_applicant_forms.each do | form | %>
+          <tr>
+            <td><%= form.project_title %></td>
+            <td><%= form.preferred_role %></td>
+            <td><%= form.experience_level %></td>
+            <td><%= form.interest_reason %></td>
+            <td><%= form.availability %></td>
+          </tr>
+        <% end %>
+      </table>
+  </div><br>
+  <%# <div class="officialcard1">
+  </div> %>
+  <%# <div class="benscard">
+    <% ActorApplicantForm.all do |actor_applicant_form| %>
+      <%# <%= render @actor_applicant_form %>
+    <%# <% end %>
+  <%# </div> %>
+</div>

@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Selection forms</h1>
+
+<div id="selection_forms">
+  <% @selection_forms.each do |selection_form| %>
+    <%= render selection_form %>
+    <p>
+      <%= link_to "Show this selection form", selection_form %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New selection form", new_selection_form_path %>
+<%= link_to "Back to the main page", admin_registration_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>

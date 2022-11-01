@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Crew applicant forms</h1>
+
+<div id="crew_applicant_forms">
+  <% @crew_applicant_forms.each do |crew_applicant_form| %>
+    <%= render crew_applicant_form %>
+    <p>
+      <%= link_to "Show this crew applicant form", crew_applicant_form %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New crew applicant form", new_crew_applicant_form_path %>
+<%= link_to "Back to the main page", user_registration_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @resignation_form %>
+
+<div>
+  <%= link_to "Edit this resignation form", edit_resignation_form_path(@resignation_form) %> |
+  <%= link_to "Back to resignation forms", resignation_forms_path %>
+
+  <%= button_to "Destroy this resignation form", @resignation_form, method: :delete %>
+</div>

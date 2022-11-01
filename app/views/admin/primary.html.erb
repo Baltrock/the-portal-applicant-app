@@ -1,0 +1,130 @@
+<div class="bensprimary">
+  This is a the front-page of YOUR root<br>
+
+  Here are your forms: <br>
+  <%= link_to "Update Forms", primary_update_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
+  <%= link_to "Selection Forms", bens_selection_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %><br>
+  <%= link_to "New Project Forms", project_form_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
+  <%= link_to "Available Frontstage Jobs Forms", available_frontstage_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %><br>
+  <%= link_to "Available Backstage Jobs Forms", available_backstage_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
+  <%= button_to "Log out", destroy_admin_session_path, method: :delete, form: {  data: { turbo: :false } }, class: "dropdown-item" %>
+  <br>
+  <br>
+
+  <div class="applicant_list">
+    <div class="benscard">
+      <h4>Actor Applicants:</h4><br>
+      <table>
+        <tr>
+          <th>Project:</th>
+          <th>Desired Role</th>
+          <th>Interest</th>
+          <th>Availability</th>
+          <th>Audition Link</th>
+        </tr>
+        <% ActorApplicantForm.all.each do |form| %>
+          <tr>
+            <td><%= form.project_title %></td>
+            <td><%= form.preferred_role %></td>
+            <td><%= form.interest_reason %></td>
+            <td><%= form.availability %></td>
+            <td><%= form.audition_tape %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+
+  <div class="benscard1">
+      <h4>Artist Applicants:</h4><br>
+      <table>
+        <tr>
+          <th>Project:</th>
+          <th>Preferred Role:</th>
+          <th>Reason</th>
+          <th>Availability</th>
+          <th>Audition-tape Link</th>
+        </tr>
+        <% ArtistApplicantForm.all.each do |form| %>
+          <tr>
+            <td><%= form.project_title %></td>
+            <td><%= form.art_form %></td>
+            <td><%= form.art_style %></td>
+            <td><%= form.interest_reason %></td>
+            <td><%= form.availability %></td>
+            <td><%= form.art_submission %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+    <div class="benscard1">
+      <h4>Musician Applicants:</h4><br>
+      <table>
+        <tr>
+          <th>Project:</th>
+          <th>Address</th>
+          <th>Email</th>
+          <th>Fuel</th>
+          <th>Phone Number</th>
+          <th>Fuel Directions</th>
+        </tr>
+        <% MusicianApplicantForm.all.each do |form| %>
+          <tr>
+            <td><%= form.project_title %></td>
+            <td><%= form.preferred_style %></td>
+            <td><%= form.instrument %></td>
+            <td><%= form.interest_reason %></td>
+            <td><%= form.availability %></td>
+            <td><%= form.audition_tape %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+  <div class="benscard">
+    <h4>Crew Applicants:</h4><br>
+      <table>
+        <tr>
+          <th>Project:</th>
+          <th>preferred_role</th>
+          <th>Experience</th>
+          <th>Experience</th>
+          <th>Availability</th>
+        </tr>
+        <% CrewApplicantForm.all.each do |form| %>
+          <tr>
+            <td><%= form.project_title %></td>
+            <td><%= form.preferred_role %></td>
+            <td><%= form.experience_level %></td>
+            <td><%= form.interest_reason %></td>
+            <td><%= form.availability %></td>
+          </tr>
+        <% end %>
+      </table>
+  </div>
+  <%# <div class="benscard"> %>
+    <%# <% CrewApplicantForm.all.each do |form| %>
+      <%# <%= render @crew_applicant_form %>
+    <%# <% end %>
+  <%# </div> %>
+  <%# <div class="benscard"> %>
+    <%# <% ComplaintForm.all.each do |form|%>
+      <%# <%= render @complaint_form %>
+    <%# <% end %>
+  <%# </div> %>
+  <%# <div class="benscard"> %>
+    <%# <% InformationForm.all.each do |form|%>
+      <%# <%= render @information_form %>
+    <%# <% end %>
+  <%# </div> %>
+  <%# <div class="benscard"> %>
+    <%# <% ResignationForm.all.each do |form|%>
+      <%# <%= render @resignation_form %>
+    <%# <% end %>
+  <%# </div> %>
+  <%# <div class="benscard">
+    <% TransferForm.all.each do |form|%>
+      <%# <%= render @transfer_form %>
+    <%# <% end %>
+  <%# </div> %>
+  <%= link_to "View All applicants", admin_view_users_path, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
+</div>

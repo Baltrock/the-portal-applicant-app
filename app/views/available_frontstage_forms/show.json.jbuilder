@@ -1,0 +1,1 @@
+json.partial! "available_frontstage_forms/available_frontstage_form", available_frontstage_form: @available_frontstage_form

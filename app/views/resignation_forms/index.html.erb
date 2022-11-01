@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Resignation forms</h1>
+
+<div id="resignation_forms">
+  <% @resignation_forms.each do |resignation_form| %>
+    <%= render resignation_form %>
+    <p>
+      <%= link_to "Show this resignation form", resignation_form %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New resignation form", new_resignation_form_path %>
+<%= link_to "Back to the main page", user_registration_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
