@@ -14,9 +14,9 @@
           <th>Bio</th>
           <th>Social Media</th>
         </tr>
+        <tr>
         <% InformationForm.all.each do |form| %>
-          <tr>
-            <td><%= form.profile_picture %></td>
+            <td><%= image_tag(form.profile_picture, :width=>150, :height=>150, :crop=> "fill") %></td>
             <td><%= form.first_name %></td>
             <td><%= form.last_name %></td>
             <td><%= form.age %></td>

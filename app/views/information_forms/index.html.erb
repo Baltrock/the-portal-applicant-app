@@ -1,7 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Information forms</h1>
-  <%= cl_image_tag @profile_picture.photo.key, height: 300, width: 400, crop: :fill %>
+  <%# <%= cl_image_tag @profile_picture.photo.key, height: 300, width: 400, crop: :fill %>
 <div id="information_forms">
   <% @information_forms.each do |information_form| %>
     <%= render information_form %>

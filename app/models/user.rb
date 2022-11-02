@@ -12,5 +12,9 @@ class User < ApplicationRecord
   has_many :complaint_forms, dependent: :destroy
   has_many :transfer_forms, dependent: :destroy
   has_one :resignation_forms, dependent: :destroy
-  has_one :photo
+  has_one :profile_picture
+  has_one :music_submission
+  has_one :music_video_submission
+  has_one :art_submission
+  has_one :audition_submission
 end
