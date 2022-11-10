@@ -1,115 +1,366 @@
 <div class="user_primary">
   This is a the front-page of the USER root<br>
-
-  <%= link_to "Information Form", form_of_information_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %><br>
-  <%= link_to "Become an Actor", actor_applicant_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
-  <%= link_to "Become an Artist", artist_applicant_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %><br>
-  <%= link_to "Become a Musician", musician_form_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
-  <%= link_to "Join the Crew", crew_applicant_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %><br>
+  <%= link_to "Information Form", information_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
   <%= link_to "Complaint", form_complaint_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
   <%= link_to "Transfer", form_transfer_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
   <%= link_to "Resign", form_resign_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
+  <%= link_to "Log out", destroy_user_session_path, method: :delete, form: {  data: { turbo: :false } }, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %><br>
 
-  <%= button_to "Log out", destroy_user_session_path, method: :delete, form: {  data: { turbo: :false } }, class: "dropdown-item" %>
-  <br>
-  <h3>Here is your information:</h3>
-  <br>
-  <div class="applications">
-    <div class="officialcard1">
-      <h4>Acting Applications:</h4><br>
-      <table>
-        <tr>
-          <th>Project:</th>
-          <th>Desired Role</th>
-          <th>Interest</th>
-          <th>Availability</th>
-          <th>Audition Link</th>
-        </tr>
-        <% current_user.actor_applicant_forms.each do | form | %>
-          <tr>
-            <td><%= form.project_title %></td>
-            <td><%= form.preferred_role %></td>
-            <td><%= form.interest_reason %></td>
-            <td><%= form.availability %></td>
-            <td><%= form.audition_tape %></td>
-          </tr>
-        <% end %>
-      </table>
-    </div><br>
-    <div class="officialcard1">
-      <h4>Art Applications:</h4><br>
-      <table>
-        <tr>
-          <th>Project</th>
-          <th>Art Form</th>
-          <th>Style</th>
-          <th>Interest</th>
-          <th>Audition Link</th>
-          <th>Availability</th>
-        </tr>
-        <% current_user.artist_applicant_forms.each do | form | %>
-          <tr>
-            <td><%= form.project_title %></td>
-            <td><%= form.art_form %></td>
-            <td><%= form.art_style %></td>
-            <td><%= form.interest_reason %></td>
-            <td><%= form.art_submission %></td>
-            <td><%= form.availability %></td>
-          </tr>
-        <% end %>
-      </table>
-    </div><br>
-    <div class="officialcard1">
-      <h4>Music Applications:</h4><br>
-      <table>
-        <tr>
-          <th>Project</th>
-          <th>Preferred Style</th>
-          <th>instrument</th>
-          <th>Interest</th>
-          <th>Submission</th>
-          <th>Availability:</th>
-        </tr>
-        <% current_user.musician_applicant_forms.each do | form | %>
-          <tr>
-            <td><%= form.project_title %></td>
-            <td><%= form.preferred_style %></td>
-            <td><%= form.instrument %></td>
-            <td><%= form.interest_reason %></td>
-            <td><%= form.availability %></td>
-            <td><%= form.audition_tape %></td>
 
-          </tr>
+<% @users_without_company_or_invest_forms = User.where.missing(:investor_company_forms).where.missing(:management_applicant_forms)
+
+@users_without_company_or_invest_forms.each do |user| %>
+  <% if current_user.id == user.id %>
+    <button id="front">Available Front-Stage Roles</button>
+    <button id="back">Available Back-Stage Roles</button>
+    <button id="management">Join Management</button>
+  <% end%>
+<% end %>
+
+
+
+<%# <% @users_without_forms.each do |user|%>
+    <%# <% if current_user.id == user.id %>
+      <%# <button id="front">Available Front-Stage Roles</button> %>
+      <%# <button id="back">Available Back-Stage Roles</button> %>
+      <%# <button id="management">Join Management</button> %>
+  <%# <% end %>
+<%# <% end %>
+
+<button id="investor">Become an investor</button>
+<br><br>
+<h3>Here is your information:</h3>
+  <% @users_without_forms.each do |user|%>
+  <% if current_user.id == user.id %>
+  <div class="megauserdisplay">
+  <div class="block1">
+  <div id="first">
+      <br>
+        <% if @actor_applicant_form == 0 %>
+        <% else %>
+          <div class="officialcard1">
+              <h4>Acting Applications:</h4>
+              <%= link_to "Become an Actor", actor_applicant_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %><br>
+              <table>
+                <tr>
+                  <th>Project:</th>
+                  <th>Role</th>
+                  <th>Interest</th>
+                  <th>Availability</th>
+                  <th>Submission</th>
+                  <th></th>
+                </tr>
+                <% current_user.actor_applicant_forms.each do | form | %>
+                  <tr>
+                    <td><%= form.project_title %></td>
+                    <td><%= form.preferred_role %></td>
+                    <td><%= form.interest_reason %></td>
+                    <td><%= form.availability %></td>
+                    <% if @audition_submissions == 1 %>
+                      <td>SUBMITTED</td>
+                    <% else %>
+                      <td>EMPTY</td>
+                    <% end %>
+                    <td><%= link_to "Edit", edit_actor_applicant_form_path(form) %></td>
+                  </tr>
+
+                <% end %>
+              </table>
+              <%= link_to "Apply for another role", new_actor_applicant_form_path %>
+            </div>
+            <br>
         <% end %>
-      </table>
+        <% if @artist_applicant_forms %>
+
+        <% else %>
+          <div class="officialcard1">
+            <h4>Art Applications:</h4>
+            <%= link_to "Become an Artist", artist_applicant_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
+            <table>
+              <tr>
+                <th>Project</th>
+                <th>Art Form</th>
+                <th>Style</th>
+                <th>Interest</th>
+                <th>Submission</th>
+                <th>Availability</th>
+                <th></th>
+              </tr>
+              <% current_user.artist_applicant_forms.each do | form | %>
+                <tr>
+                  <td><%= form.project_title %></td>
+                  <td><%= form.art_form %></td>
+                  <td><%= form.art_style %></td>
+                  <td><%= form.interest_reason %></td>
+                  <% if @art_submissions == 1 %>
+                    <td>SUBMITTED</td>
+                  <% else %>
+                    <td>EMPTY</td>
+                  <% end %>
+                  <td><%= form.availability %></td>
+                  <td><%= link_to "Edit", edit_artist_applicant_form_path(form) %></td>
+                </tr>
+              <% end %>
+            </table>
+            <%= link_to "Add more art work", new_artist_applicant_form_path %>
+          </div>
+          <br>
+        <% end %>
+          <div class="officialcard1">
+          <h4>Music Applications:</h4>
+          <%= link_to "Become a Musician", musician_form_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
+          <table>
+            <tr>
+              <th>Project</th>
+              <th>Style</th>
+              <th>instrument</th>
+              <th>Interest</th>
+              <th>Availability</th>
+              <th>Submission</th>
+              <th></th>
+            </tr>
+            <% current_user.musician_applicant_forms.each do | form | %>
+              <tr>
+                <td><%= form.project_title %></td>
+                <td><%= form.preferred_style %></td>
+                <td><%= form.instrument %></td>
+                <td><%= form.interest_reason %></td>
+                <td><%= form.availability %></td>
+                <% if @audition_tape == 1 %>
+                  <td>SUBMITTED</td>
+                <% else %>
+                  <td>EMPTY</td>
+                <% end %>
+                <td><%= link_to "Edit", edit_musician_applicant_form_path(form) %></td>
+              </tr>
+            <% end %>
+          </table>
+          <%= link_to "Add more songs", new_musician_applicant_form_path %>
+        </div>
+      </div>
+
+      <div id="second">
+      <br>
+        <div class="officialcard1">
+        <h4>Crew Applications:</h4>
+          <%= link_to "Join the Crew", crew_applicant_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %><br>
+          <table>
+            <tr>
+              <th>Project:</th>
+              <th>Preferred Role</th>
+              <th>Experience</th>
+              <th>Interest</th>
+              <th>Availability</th>
+              <th></th>
+            </tr>
+            <% current_user.crew_applicant_forms.each do | form | %>
+              <tr>
+                <td><%= form.project_title %></td>
+                <td><%= form.preferred_role %></td>
+                <td><%= form.experience_level %></td>
+                <td><%= form.interest_reason %></td>
+                <td><%= form.availability %></td>
+                <td><%= link_to "Edit", edit_crew_applicant_form_path(form) %></td>
+              </tr>
+            <% end %>
+          </table>
+          <% if @crew_applicant_forms %>
+          <%= link_to "Apply for more roles", new_crew_applicant_form_path %>
+          <% else %>
+          <% end %>
+
+        <br>
+        </div>
+      </div>
+        <div id="third">
+        <br>
+        <div class="officialcard1">
+        <h4>Management Applications:</h4>
+          <%= link_to "Join Project Portals Management Team", management_applicant_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %><br>
+          <h4>Your information: </h4>
+          <table>
+            <tr>
+              <th>Project:</th>
+              <th>Applied roles:</th>
+              <th>Interest</th>
+              <th>Availability</th>
+              <th></th>
+            </tr>
+            <% current_user.management_applicant_forms.each do | form | %>
+              <tr>
+                <td><%= form.preferred_project %></td>
+                <td><%= form.preferred_role %></td>
+                <td><%= form.interest_reason %></td>
+                <td><%= form.availability %></td>
+                <td><%= link_to "Edit", edit_management_applicant_form_path(form) %></td>
+              </tr>
+            <% end %>
+          </table>
+          <% if @investor_company_forms == 1 %>
+          <%= link_to "Input your info", new_management_applicant_form_path %>
+          <% else %>
+          <% end %>
+          <br>
+        <h4>Your requests:</h4>
+          <table>
+            <tr>
+              <th>Request</th>
+              <th>Area</th>
+              <th>People</th>
+              <th>Purpose</th>
+              <th>Expectation</th>
+              <th></th>
+            </tr>
+            <% current_user.management_request_forms.each do | form | %>
+              <tr>
+                <td><%= form.request_target %></td>
+                <td><%= form.project_involved %></td>
+                <td><%= form.people_involved %></td>
+                <td><%= form.request_purpose %></td>
+                <td><%= form.outcome_expectation %></td>
+                <td><%= link_to "Edit", edit_management_request_form_path(form) %></td>
+              </tr>
+            <% end %>
+          </table>
+          <%= link_to "Make a Request", new_management_request_form_path %><br>
+        <br><h4>Review of Team Members:</h4>
+          <table>
+            <tr>
+              <th>Name:</th>
+              <th>Project(s)/th>
+              <th>People</th>
+              <th>Purpose</th>
+              <th>Investment History</th>
+              <th>Recommendation</th>
+              <th></th>
+            </tr>
+            <% current_user.management_review_forms.each do | form | %>
+              <tr>
+                <td><%= form.review_title %></td>
+                <td><%= form.project_involved %></td>
+                <td><%= form.people_involved %></td>
+                <td><%= form.review_purpose %></td>
+                <td><%= form.investment_history %> </td>
+                <td><%= form.outcome_recommendation %></td>
+                <td><%= link_to "Edit", edit_management_review_form_path(form) %></td>
+              </tr>
+            <% end %>
+          </table>
+
+          <%= link_to "Create a review", new_management_review_form_path %>
+          </div>
+        </div>
+        <div id="fourth">
+        <br>
+        <% end %>
+        <% end %>
+        <div class="officialcard1">
+        <h4>Investor Information:</h4>
+          <%# <% if @investor_company_forms == 1 %>
+          <%# <%= link_to "Become an Investor", company_form_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
+          <%# <% else %>
+          <%# <% end %>
+          <h4>Company Info:</h4>
+          <table>
+            <tr>
+              <th>Company Name:</th>
+              <th>Address</th>
+              <th>Company Website</th>
+              <th>Interest</th>
+              <th>Availability</th>
+              <th></th>
+            </tr>
+            <% current_user.investor_company_forms.each do | form | %>
+              <tr>
+                <td><%= form.company_name %></td>
+                <td><%= form.company_address %></td>
+                <td><%= form.company_website_link %></td>
+                <td><%= form.interest_reason %></td>
+                <td><%= form.availability %></td>
+                <td><%= link_to "Edit", edit_investor_company_form_path(form) %></td>
+              </tr>
+            <% end %>
+          </table>
+          <% if @investor_company_forms.count == 1 %>
+          <% else %>
+            <%= link_to "Set up your Information", new_investor_company_form_path %>
+          <% end %>
+          <br>
+        <h4>Investment(s):</h4>
+          <table>
+            <tr>
+              <th>Invested area:</th>
+              <th>Currency</th>
+              <th>Total investment</th>
+              <th>Interest</th>
+              <th>Investment History</th>
+              <th>Availability</th>
+              <th></th>
+            </tr>
+            <% current_user.investor_invest_forms.each do | form | %>
+              <tr>
+                <td><%= form.general_or_key %></td>
+                <td><%= form.currency %></td>
+                <td><%= form.investment_amount %></td>
+                <td><%= form.interest_reason %></td>
+                <td><%= form.investment_history %> </td>
+                <td><%= form.availability %></td>
+                <td><%= link_to "Edit", edit_investor_company_form_path(form) %></td>
+              </tr>
+            <% end %>
+          </table>
+          <%= link_to "Register your investment(s)", new_investor_invest_form_path %>
+        </div>
+      </div>
     </div>
-  </div><br>
-  <div class="officialcard1">
-    <h4>Crew Applications:</h4><br>
-      <table>
-        <tr>
-          <th>Project:</th>
-          <th>Preferred Role</th>
-          <th>Experience</th>
-          <th>Interest</th>
-          <th>Availability</th>
-        </tr>
-        <% current_user.crew_applicant_forms.each do | form | %>
-          <tr>
-            <td><%= form.project_title %></td>
-            <td><%= form.preferred_role %></td>
-            <td><%= form.experience_level %></td>
-            <td><%= form.interest_reason %></td>
-            <td><%= form.availability %></td>
-          </tr>
-        <% end %>
-      </table>
-  </div><br>
-  <%# <div class="officialcard1">
-  </div> %>
-  <%# <div class="benscard">
-    <% ActorApplicantForm.all do |actor_applicant_form| %>
-      <%# <%= render @actor_applicant_form %>
-    <%# <% end %>
-  <%# </div> %>
+  <div class="block2 col-5">
+    <div class="infobox">
+      <% NewProjectForm.all.each do |form|%>
+        <strong><%= form.project_title %><br></strong>
+        <%= form.project_introduction %><br>
+        <%= form.project_description %><br>
+      <% end %>
+    </div>
+  </div>
 </div>
+
+
+
+<script>
+      const targetDiv1 = document.getElementById("first");
+      const btn1 = document.getElementById("front");
+      const targetDiv2 = document.getElementById("second")
+      const btn2 = document.getElementById("back")
+      const targetDiv3 = document.getElementById("third")
+      const btn3 = document.getElementById("management")
+      const targetDiv4 = document.getElementById("fourth")
+      const btn4 = document.getElementById("investor")
+      btn1.onclick = function () {
+        if (targetDiv1.style.display !== "none") {
+          targetDiv1.style.display = "none";
+        } else {
+          targetDiv1.style.display = "block";
+        }
+      }
+      btn2.onclick = function() {
+        if (targetDiv2.style.display !== "none") {
+            targetDiv2.style.display = "none";
+          } else {
+            targetDiv2.style.display = "block";
+          }
+      }
+      btn3.onclick = function() {
+        if (targetDiv3.style.display !== "none") {
+            targetDiv3.style.display = "none";
+          } else {
+            targetDiv3.style.display = "block";
+          }
+      }
+      btn4.onclick = function() {
+        if (targetDiv4.style.display !== "none") {
+            targetDiv4.style.display = "none";
+          } else {
+            targetDiv4.style.display = "block";
+          }
+      }
+</script>

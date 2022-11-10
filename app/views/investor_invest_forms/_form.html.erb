@@ -1,0 +1,19 @@
+
+<%= simple_form_for(@investor_invest_form) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :general_or_key %>
+    <% when GeneralOrKey = 'specific' then .... %>
+    <%= f.input :currency %>
+    <%= f.input :investment_amount %>
+    <%= f.input :interest_reason %>
+    <%= f.input :investment_history %>
+    <%= f.input :availability %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

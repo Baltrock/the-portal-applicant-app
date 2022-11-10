@@ -9,7 +9,7 @@
     <%= f.input :instrument %>
     <%= f.input :interest_reason %>
     <%= f.input :availability %>
-    <%= f.input :audition_tape %>
+    <%= f.file_field :audition_tape, as: :file %>
     <%# <%= f.association :user %>
   </div>
 

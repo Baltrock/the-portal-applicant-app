@@ -22,6 +22,7 @@ class NewProjectFormsController < ApplicationController
   # POST /new_project_forms or /new_project_forms.json
   def create
     @new_project_form = NewProjectForm.new(new_project_form_params)
+    @new_project_form.admin = current_admin
 
     respond_to do |format|
       if @new_project_form.save

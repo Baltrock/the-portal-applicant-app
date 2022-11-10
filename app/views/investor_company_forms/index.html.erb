@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Investor company forms</h1>
+
+<div id="investor_company_forms">
+  <% @investor_company_forms.each do |investor_company_form| %>
+    <%= render investor_company_form %>
+    <p>
+      <%= link_to "Show this investor company form", investor_company_form %>
+    </p>
+  <% end %>
+</div>
+<% if @investor_company_forms.count == 1 %>
+<% else %>
+<%= link_to "New investor company form", new_investor_company_form_path %>
+<% end %>
+<%= link_to "Back to the main page", user_registration_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>

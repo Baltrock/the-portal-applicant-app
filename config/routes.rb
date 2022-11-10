@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   mount ForestLiana::Engine => '/forest'
+  resources :management_review_forms
+  resources :management_request_forms
+  resources :management_applicant_forms
+  resources :investor_invest_forms
+  resources :investor_company_forms
   resources :update_forms
   resources :selection_forms
   resources :new_project_forms
@@ -29,6 +34,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  get '/management_review_forms', to: 'management_review_forms#index', as: :management_review
+  get '/management_request_forms', to: 'management_request_forms#index', as: :management_request
+  get '/management_applicant_forms', to: 'management_applicant_forms#index', as: :management_applicant
+  get '/investor_invest_forms', to: 'investor_invest_form#index', as: :company_invest
+  get '/investor_company_forms', to: 'investor_company_forms#index', as: :company_form
   get '/glitch_input_forms', to: 'glitch_input_forms#index', as: :glitch_form
   get '/update_forms', to: 'update_forms#index', as: :primary_update
   get '/selection_forms', to: 'election_forms#index', as: :bens_selection
@@ -38,7 +48,7 @@ Rails.application.routes.draw do
   get '/actor_applicant_forms', to: 'actor_applicant_forms#index', as: :actor_applicant
   get '/artist_applicant_forms', to: 'artist_applicant_forms#index', as: :artist_applicant
   get '/crew_applicant_form', to: 'crew_applicant_forms#index', as: :crew_applicant
-  get '/information_forms', to: 'information_forms#index', as: :form_of_information
+  get '/information_forms', to: 'information_forms#index', as: :information
   get '/musician_applicant_forms', to: 'musician_applicant_forms#index', as: :musician_form
   get '/transfer_forms', to: 'transfer_forms#index', as: :form_transfer
   get '/complaint_forms', to: 'complaint_forms#index', as: :form_complaint

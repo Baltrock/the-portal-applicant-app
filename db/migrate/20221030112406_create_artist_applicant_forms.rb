@@ -6,7 +6,6 @@ class CreateArtistApplicantForms < ActiveRecord::Migration[7.0]
       t.string :art_style
       t.string :interest_reason
       t.string :availability
-      t.string :art_submission
       t.references :user, null: false, foreign_key: true
 
       t.timestamps

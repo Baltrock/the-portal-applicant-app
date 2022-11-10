@@ -12,6 +12,11 @@ class User < ApplicationRecord
   has_many :complaint_forms, dependent: :destroy
   has_many :transfer_forms, dependent: :destroy
   has_one :resignation_forms, dependent: :destroy
+  has_many :investor_company_forms, dependent: :destroy
+  has_many :investor_invest_forms, dependent: :destroy
+  has_many :management_applicant_forms, dependent: :destroy
+  has_many :management_request_forms, dependent: :destroy
+  has_many :management_review_forms, dependent: :destroy
   has_one :profile_picture
   has_one :music_submission
   has_one :music_video_submission

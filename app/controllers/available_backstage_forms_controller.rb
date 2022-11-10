@@ -22,7 +22,7 @@ class AvailableBackstageFormsController < ApplicationController
   # POST /available_backstage_forms or /available_backstage_forms.json
   def create
     @available_backstage_form = AvailableBackstageForm.new(available_backstage_form_params)
-    # @available_backstabe_form.admin = current_user
+    @available_backstabe_form.admin = current_admin
 
     respond_to do |format|
       if @available_backstage_form.save

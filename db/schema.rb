@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_01_114831) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_07_174923) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,7 +47,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_01_114831) do
     t.string "preferred_role"
     t.string "interest_reason"
     t.string "availability"
-    t.string "audition_tape"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -160,6 +159,66 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_01_114831) do
     t.index ["user_id"], name: "index_information_forms_on_user_id"
   end
 
+  create_table "investor_company_forms", force: :cascade do |t|
+    t.string "company_name"
+    t.string "company_address"
+    t.string "company_website_link"
+    t.string "interest_reason"
+    t.string "availability"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_investor_company_forms_on_user_id"
+  end
+
+  create_table "investor_invest_forms", force: :cascade do |t|
+    t.string "general_or_key"
+    t.string "currency"
+    t.string "investment_amount"
+    t.string "interest_reason"
+    t.string "investment_history"
+    t.string "availability"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_investor_invest_forms_on_user_id"
+  end
+
+  create_table "management_applicant_forms", force: :cascade do |t|
+    t.string "preferred_project"
+    t.string "preferred_role"
+    t.string "interest_reason"
+    t.string "availability"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_management_applicant_forms_on_user_id"
+  end
+
+  create_table "management_request_forms", force: :cascade do |t|
+    t.string "request_target"
+    t.string "project_involved"
+    t.string "people_involved"
+    t.string "request_purpose"
+    t.string "outcome_expectation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_management_request_forms_on_user_id"
+  end
+
+  create_table "management_review_forms", force: :cascade do |t|
+    t.string "review_title"
+    t.string "project_involved"
+    t.string "people_involved"
+    t.string "review_purpose"
+    t.string "outcome_recommendation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_management_review_forms_on_user_id"
+  end
+
   create_table "musician_applicant_forms", force: :cascade do |t|
     t.string "project_title"
     t.string "preferred_style"
@@ -252,6 +311,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_01_114831) do
   add_foreign_key "complaint_forms", "users"
   add_foreign_key "crew_applicant_forms", "users"
   add_foreign_key "information_forms", "users"
+  add_foreign_key "investor_company_forms", "users"
+  add_foreign_key "investor_invest_forms", "users"
+  add_foreign_key "management_applicant_forms", "users"
+  add_foreign_key "management_request_forms", "users"
+  add_foreign_key "management_review_forms", "users"
   add_foreign_key "musician_applicant_forms", "users"
   add_foreign_key "new_project_forms", "admins"
   add_foreign_key "resignation_forms", "users"

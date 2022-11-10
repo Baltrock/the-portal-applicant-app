@@ -23,6 +23,7 @@ class AvailableFrontstageFormsController < ApplicationController
   # POST /available_frontstage_forms or /available_frontstage_forms.json
   def create
     @available_frontstage_form = AvailableFrontstageForm.new(available_frontstage_form_params)
+    @available_frontstage_form.admin = current_admin
 
     respond_to do |format|
       if @available_frontstage_form.save

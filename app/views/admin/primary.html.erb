@@ -1,130 +1,185 @@
 <div class="bensprimary">
   This is a the front-page of YOUR root<br>
 
-  Here are your forms: <br>
-  <%= link_to "Update Forms", primary_update_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
-  <%= link_to "Selection Forms", bens_selection_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %><br>
-  <%= link_to "New Project Forms", project_form_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
-  <%= link_to "Available Frontstage Jobs Forms", available_frontstage_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %><br>
-  <%= link_to "Available Backstage Jobs Forms", available_backstage_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
-  <%= button_to "Log out", destroy_admin_session_path, method: :delete, form: {  data: { turbo: :false } }, class: "dropdown-item" %>
-  <br>
-  <br>
+  <button id="applicant">Applicant display</button>
+  <button id="management">Management display</button>
+  <button id="investor">Investor display</button>
+  <br><br>
+  <div id="first" class="applicant_page">
+    Here are your forms: <br>
+    <%= link_to "Update Forms", primary_update_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
+    <%= link_to "Selection Forms", bens_selection_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %><br>
+    <%= link_to "New Project Forms", project_form_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
+    <%= link_to "Available Frontstage Jobs Forms", available_frontstage_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %><br>
+    <%= link_to "Available Backstage Jobs Forms", available_backstage_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
+    <%= button_to "Log out", destroy_admin_session_path, method: :delete, form: {  data: { turbo: :false } }, class: "dropdown-item" %>
+    <br>
+    <br>
 
-  <div class="applicant_list">
-    <div class="benscard">
-      <h4>Actor Applicants:</h4><br>
-      <table>
-        <tr>
-          <th>Project:</th>
-          <th>Desired Role</th>
-          <th>Interest</th>
-          <th>Availability</th>
-          <th>Audition Link</th>
-        </tr>
-        <% ActorApplicantForm.all.each do |form| %>
+    <div class="applicant_list">
+      <div class="benscard">
+        <h4>Actor Applicants:</h4><br>
+        <table>
           <tr>
-            <td><%= form.project_title %></td>
-            <td><%= form.preferred_role %></td>
-            <td><%= form.interest_reason %></td>
-            <td><%= form.availability %></td>
-            <td><%= form.audition_tape %></td>
+            <th>Project:</th>
+            <th>Desired Role</th>
+            <th>Interest</th>
+            <th>Availability</th>
+            <th>Audition Link</th>
           </tr>
-        <% end %>
-      </table>
-    </div>
+          <% ActorApplicantForm.all.each do |form| %>
+            <tr>
+              <td><%= form.project_title %></td>
+              <td><%= form.preferred_role %></td>
+              <td><%= form.interest_reason %></td>
+              <td><%= form.availability %></td>
+              <% if @actor_applicant_form == 1 %>
+                <td><%= cl_video_tag("actor_applicant_form.audition_submissions", :background=>"blue", :height=>300, :width=>300, :crop=>"pad") %></td>
+              <% else %>
+                <td>EMPTY</td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </div>
 
-  <div class="benscard1">
-      <h4>Artist Applicants:</h4><br>
-      <table>
-        <tr>
-          <th>Project:</th>
-          <th>Preferred Role:</th>
-          <th>Reason</th>
-          <th>Availability</th>
-          <th>Audition-tape Link</th>
-        </tr>
-        <% ArtistApplicantForm.all.each do |form| %>
-          <tr>
-            <td><%= form.project_title %></td>
-            <td><%= form.art_form %></td>
-            <td><%= form.art_style %></td>
-            <td><%= form.interest_reason %></td>
-            <td><%= form.availability %></td>
-            <td><%= form.art_submission %></td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
     <div class="benscard1">
-      <h4>Musician Applicants:</h4><br>
-      <table>
-        <tr>
-          <th>Project:</th>
-          <th>Address</th>
-          <th>Email</th>
-          <th>Fuel</th>
-          <th>Phone Number</th>
-          <th>Fuel Directions</th>
-        </tr>
-        <% MusicianApplicantForm.all.each do |form| %>
+        <h4>Artist Applicants:</h4><br>
+
+        <table>
           <tr>
-            <td><%= form.project_title %></td>
-            <td><%= form.preferred_style %></td>
-            <td><%= form.instrument %></td>
-            <td><%= form.interest_reason %></td>
-            <td><%= form.availability %></td>
-            <td><%= form.audition_tape %></td>
+            <th>Project:</th>
+            <th>Art Form</th>
+            <th>Art Style</th>
+            <th>Reason</th>
+            <th>Availability</th>
+            <th>Art Submission</th>
           </tr>
-        <% end %>
-      </table>
+          <% ArtistApplicantForm.all.each do |form| %>
+            <tr>
+              <td><%= form.project_title %></td>
+              <td><%= form.art_form %></td>
+              <td><%= form.art_style %></td>
+              <td><%= form.interest_reason %></td>
+              <td><%= form.availability %></td>
+              <% if @art_submission == 1 %>
+                <td><%= image_tag(form.art_submissions, :width=>150, :height=>150, :crop=> "fill") %></td>
+              <% else %>
+                <td>EMPTY</td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+      <div class="benscard1">
+        <h4>Musician Applicants:</h4><br>
+        <table>
+          <tr>
+            <th>Project:</th>
+            <th>Style</th>
+            <th>Instrument</th>
+            <th>Interest</th>
+            <th>Availability</th>
+            <th>Audio-audition</th>
+          </tr>
+          <% MusicianApplicantForm.all.each do |form| %>
+            <tr>
+              <td><%= form.project_title %></td>
+              <td><%= form.preferred_style %></td>
+              <td><%= form.instrument %></td>
+              <td><%= form.interest_reason %></td>
+              <td><%= form.availability %></td>
+              <% if @audition_submissions == 1 %>
+                <td><%= image_tag(form.audition_submissions, :width=>150, :height=>150, :crop=> "fill") %></td>
+              <% else %>
+                <td>EMPTY</td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </div>
     </div>
-  </div>
-  <div class="benscard">
-    <h4>Crew Applicants:</h4><br>
-      <table>
-        <tr>
-          <th>Project:</th>
-          <th>preferred_role</th>
-          <th>Experience</th>
-          <th>Experience</th>
-          <th>Availability</th>
-        </tr>
-        <% CrewApplicantForm.all.each do |form| %>
+    <div class="benscard">
+      <h4>Crew Applicants:</h4><br>
+        <table>
           <tr>
-            <td><%= form.project_title %></td>
-            <td><%= form.preferred_role %></td>
-            <td><%= form.experience_level %></td>
-            <td><%= form.interest_reason %></td>
-            <td><%= form.availability %></td>
+            <th>Project:</th>
+            <th>preferred_role</th>
+            <th>Experience</th>
+            <th>Experience</th>
+            <th>Availability</th>
           </tr>
-        <% end %>
-      </table>
+          <% CrewApplicantForm.all.each do |form| %>
+            <tr>
+              <td><%= form.project_title %></td>
+              <td><%= form.preferred_role %></td>
+              <td><%= form.experience_level %></td>
+              <td><%= form.interest_reason %></td>
+              <td><%= form.availability %></td>
+            </tr>
+          <% end %>
+        </table>
+    </div>
+    <%# <div class="benscard"> %>
+      <%# <% CrewApplicantForm.all.each do |form| %>
+        <%# <%= render @crew_applicant_form %>
+      <%# <% end %>
+    <%# </div> %>
+    <%# <div class="benscard"> %>
+      <%# <% ComplaintForm.all.each do |form|%>
+        <%# <%= render @complaint_form %>
+      <%# <% end %>
+    <%# </div> %>
+    <%# <div class="benscard"> %>
+      <%# <% InformationForm.all.each do |form|%>
+        <%# <%= render @information_form %>
+      <%# <% end %>
+    <%# </div> %>
+    <%# <div class="benscard"> %>
+      <%# <% ResignationForm.all.each do |form|%>
+        <%# <%= render @resignation_form %>
+      <%# <% end %>
+    <%# </div> %>
+    <%# <div class="benscard">
+      <% TransferForm.all.each do |form|%>
+        <%# <%= render @transfer_form %>
+      <%# <% end %>
+    <%# </div> %>
+    <%= link_to "View All applicants", admin_view_users_path, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
+
   </div>
-  <%# <div class="benscard"> %>
-    <%# <% CrewApplicantForm.all.each do |form| %>
-      <%# <%= render @crew_applicant_form %>
-    <%# <% end %>
-  <%# </div> %>
-  <%# <div class="benscard"> %>
-    <%# <% ComplaintForm.all.each do |form|%>
-      <%# <%= render @complaint_form %>
-    <%# <% end %>
-  <%# </div> %>
-  <%# <div class="benscard"> %>
-    <%# <% InformationForm.all.each do |form|%>
-      <%# <%= render @information_form %>
-    <%# <% end %>
-  <%# </div> %>
-  <%# <div class="benscard"> %>
-    <%# <% ResignationForm.all.each do |form|%>
-      <%# <%= render @resignation_form %>
-    <%# <% end %>
-  <%# </div> %>
-  <%# <div class="benscard">
-    <% TransferForm.all.each do |form|%>
-      <%# <%= render @transfer_form %>
-    <%# <% end %>
-  <%# </div> %>
-  <%= link_to "View All applicants", admin_view_users_path, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>
+  <div id="second">Hello</div>
+
+  <div id="third">Hello</div>
+    <script>
+      const targetDiv1 = document.getElementById("first");
+      const btn1 = document.getElementById("applicant");
+      const targetDiv2 = document.getElementById("second")
+      const btn2 = document.getElementById("management")
+      const targetDiv3 = document.getElementById("third")
+      const btn3 = document.getElementById("investor")
+      btn1.onclick = function () {
+        if (targetDiv1.style.display !== "none") {
+          targetDiv1.style.display = "none";
+        } else {
+          targetDiv1.style.display = "block";
+        }
+      }
+      btn2.onclick = function() {
+        if (targetDiv2.style.display !== "none") {
+            targetDiv2.style.display = "none";
+          } else {
+            targetDiv2.style.display = "block";
+          }
+      }
+      btn3.onclick = function() {
+        if (targetDiv3.style.display !== "none") {
+            targetDiv3.style.display = "none";
+          } else {
+            targetDiv3.style.display = "block";
+          }
+      }
+    </script>
+  <div class="second_column">
+  </div>
 </div>

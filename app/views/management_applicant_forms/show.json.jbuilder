@@ -1,0 +1,1 @@
+json.partial! "management_applicant_forms/management_applicant_form", management_applicant_form: @management_applicant_form

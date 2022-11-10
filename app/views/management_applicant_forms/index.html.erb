@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Management applicant forms</h1>
+
+<div id="management_applicant_forms">
+  <% @management_applicant_forms.each do |management_applicant_form| %>
+    <%= render management_applicant_form %>
+    <p>
+      <%= link_to "Show this management applicant form", management_applicant_form %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New management applicant form", new_management_applicant_form_path %>
+<%= link_to "Back to the main page", user_registration_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>

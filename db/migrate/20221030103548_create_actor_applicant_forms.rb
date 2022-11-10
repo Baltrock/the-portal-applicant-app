@@ -5,7 +5,6 @@ class CreateActorApplicantForms < ActiveRecord::Migration[7.0]
       t.string :preferred_role
       t.string :interest_reason
       t.string :availability
-      t.string :audition_tape
       t.references :user, null: false, foreign_key: true
 
       t.timestamps

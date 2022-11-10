@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Management review forms</h1>
+
+<div id="management_review_forms">
+  <% @management_review_forms.each do |management_review_form| %>
+    <%= render management_review_form %>
+    <p>
+      <%= link_to "Show this management review form", management_review_form %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New management review form", new_management_review_form_path %>
+<%= link_to "Back to the main page", user_registration_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>

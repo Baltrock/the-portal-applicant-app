@@ -66,6 +66,6 @@ class ActorApplicantFormsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def actor_applicant_form_params
-      params.require(:actor_applicant_form).permit(:project_title, :preferred_role, :interest_reason, :availability, :audition_tape)
+      params.require(:actor_applicant_form).permit(:project_title, :preferred_role, :interest_reason, :availability)
     end
 end

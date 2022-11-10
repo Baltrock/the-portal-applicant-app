@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @investor_invest_form %>
+
+<div>
+  <%= link_to "Edit this investor invest form", edit_investor_invest_form_path(@investor_invest_form) %> |
+  <%= link_to "Back to investor invest forms", investor_invest_forms_path %>
+
+  <%= button_to "Destroy this investor invest form", @investor_invest_form, method: :delete %>
+</div>

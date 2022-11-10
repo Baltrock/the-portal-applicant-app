@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @management_request_form %>
+
+<div>
+  <%= link_to "Edit this management request form", edit_management_request_form_path(@management_request_form) %> |
+  <%= link_to "Back to management request forms", management_request_forms_path %>
+
+  <%= button_to "Destroy this management request form", @management_request_form, method: :delete %>
+</div>

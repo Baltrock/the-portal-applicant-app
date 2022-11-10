@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Management request forms</h1>
+
+<div id="management_request_forms">
+  <% @management_request_forms.each do |management_request_form| %>
+    <%= render management_request_form %>
+    <p>
+      <%= link_to "Show this management request form", management_request_form %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New management request form", new_management_request_form_path %>
+<%= link_to "Back to the main page", user_registration_url, class: "btn btn-pink text-grey text-uppercase rounded-pill fw-bold" %>

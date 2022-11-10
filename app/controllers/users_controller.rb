@@ -1,10 +1,13 @@
 class UsersController < ApplicationController
   before_action :set_information_form, only: %i[ show edit update destroy ]
   before_action :set_crew_applicant_form, only: %i[ show edit update destroy ]
+  before_action :set_actor_applicant_form, only: %i[ show edit update destroy ]
 
   # GET /information_forms or /information_forms.json
   def primary
     @user = User.all
+    @users_without_forms = User.where.missing(:investor_company_forms)
+    @users_without_forms_two = User.where.missing(:management_applicant_forms)
   end
 
   def show

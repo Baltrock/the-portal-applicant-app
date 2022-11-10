@@ -26,7 +26,8 @@
 
   <p>
     <strong>Audition tape:</strong>
-    <%= musician_applicant_form.audition_tape %>
+    <%= cl_video_tag("musician_applicant_form.audition_tapes", :background=>"blue", :height=>300, :width=>300, :crop=>"pad") %>
+    <%# <%= musician_applicant_form.audition_submission %>
   </p>
 
   <%# <p>
