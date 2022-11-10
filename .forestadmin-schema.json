@@ -2545,7 +2545,7 @@
       "widget": null,
       "validations": []
     }, {
-      "field": "user_id",
+      "field": "user",
       "type": "Number",
       "default_value": null,
       "enums": null,
@@ -2555,8 +2555,9 @@
       "is_required": false,
       "is_sortable": true,
       "is_virtual": false,
-      "reference": null,
-      "inverse_of": null,
+      "reference": "User.id",
+      "inverse_of": "management_applicant_forms",
+      "relationship": "BelongsTo",
       "widget": null,
       "validations": []
     }],
@@ -3972,6 +3973,22 @@
       "is_sortable": true,
       "is_virtual": false,
       "reference": "InvestorInvestForm.id",
+      "inverse_of": "user",
+      "relationship": "HasMany",
+      "widget": null,
+      "validations": []
+    }, {
+      "field": "management_applicant_forms",
+      "type": ["Number"],
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": false,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": "ManagementApplicantForm.id",
       "inverse_of": "user",
       "relationship": "HasMany",
       "widget": null,
